@@ -1,0 +1,6 @@
+<h1><%= @post.title %></h1>
+<div>
+  <pre>
+    <%= @post.body %>
+  </pre>
+</div>

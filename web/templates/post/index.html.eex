@@ -1,5 +1,7 @@
 <ul>
 <%= for post <- @posts do %>
-  <li><%= post.title %></li>
+  <li>
+    <a href="<%= post_path(@conn, :show, post.id) %>"><%= post.title %></a>
+  </li>
 <% end %>
 </ul>

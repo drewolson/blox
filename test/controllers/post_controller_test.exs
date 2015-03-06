@@ -14,4 +14,15 @@ defmodule Blox.PostControllerTest do
       assert String.contains?(conn.resp_body, "Post 2")
     end
   end
+
+  describe "show" do
+    it "displays a post and its body" do
+      post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert
+
+      conn = conn(:get, "/posts/#{post.id}") |> send_request
+
+      assert String.contains?(conn.resp_body, "Bob Loblaw")
+      assert String.contains?(conn.resp_body, "Some lawyer-y stuff goes here")
+    end
+  end
 end
