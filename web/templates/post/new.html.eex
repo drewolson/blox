@@ -1,3 +1,7 @@
+<%= if form_errors(@form) != [] do %>
+<div>Errors!</div>
+<% end %>
+
 <form method="POST" action="<%= post_path(@conn, :create) %>">
   <input name="post[title]" type="text" value="<%= form_value(@form, :title) %>" />
   <input name="post[body]" type="textarea" value="<%= form_value(@form, :body) %>" />
