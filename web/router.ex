@@ -8,6 +8,9 @@ defmodule Blox.Router do
     plug :protect_from_forgery
   end
 
+  pipeline :api do
+    plug :accepts, ~w(json)
+  end
 
   scope "/", Blox do
     pipe_through :browser
@@ -15,5 +18,11 @@ defmodule Blox.Router do
     get "/", HomeController, :show
 
     resources "/posts", PostController
+  end
+
+  scope "/api/v1", Blox do
+    pipe_through :api
+
+    resources "/posts", PostController, only: [:show]
   end
 end
