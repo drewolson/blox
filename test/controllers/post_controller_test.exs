@@ -72,4 +72,38 @@ defmodule Blox.PostControllerTest do
       assert String.contains?(conn.resp_body, "Some lawyer-y stuff goes here")
     end
   end
+
+  describe "update" do
+    it "updates the post with the provided values" do
+      post = %Post{title: "1", body: "1"} |> Blox.Repo.insert
+
+      conn(:patch, "/posts/#{post.id}", %{
+        "post": %{
+          "title": "2",
+          "body": "2"
+        }
+      }) |> send_request
+
+      post = Blox.Repo.get(Post, post.id)
+
+      assert post.title == "2"
+      assert post.body == "2"
+    end
+
+    it "doesn't update on validation errors" do
+      post = %Post{title: "1", body: "1"} |> Blox.Repo.insert
+
+      conn(:patch, "/posts/#{post.id}", %{
+        "post": %{
+          "title": "2",
+          "body": ""
+        }
+      }) |> send_request
+
+      post = Blox.Repo.get(Post, post.id)
+
+      assert post.title == "1"
+      assert post.body == "1"
+    end
+  end
 end
