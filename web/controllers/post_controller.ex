@@ -20,6 +20,16 @@ defmodule Blox.PostController do
     end
   end
 
+  def edit(conn, %{"id" => id}) do
+    form = Post
+    |> Blox.Repo.get(id)
+    |> Post.changeset
+    |> Blox.Form.new
+
+    render conn, :edit,
+      form: form
+  end
+
   def index(conn, _params) do
     posts = Post
     |> Post.order_by_date

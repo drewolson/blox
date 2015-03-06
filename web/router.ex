@@ -14,6 +14,6 @@ defmodule Blox.Router do
 
     get "/", HomeController, :show
 
-    resources "/posts", PostController, only: [:create, :index, :new, :show]
+    resources "/posts", PostController
   end
 end

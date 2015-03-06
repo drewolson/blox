@@ -32,6 +32,16 @@ defmodule Blox.PostControllerTest do
     end
   end
 
+  describe "edit" do
+    it "renders" do
+      post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert
+
+      conn = conn(:get, "/posts/#{post.id}/edit") |> send_request
+
+      assert conn.status == 200
+    end
+  end
+
   describe "index" do
     it "displays posts" do
       %Post{title: "Post 1", body: "Body 1"} |> Blox.Repo.insert

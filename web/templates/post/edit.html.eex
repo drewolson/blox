@@ -1,0 +1,11 @@
+<%= if form_errors(@form) != [] do %>
+<div>Errors!</div>
+<% end %>
+
+<form method="POST" action="<%= post_path(@conn, :update, form_value(@form, :id)) %>">
+  <input name="_method" type="hidden" value="PATCH" />
+
+  <%= render Blox.PostView, "_form.html", assigns %>
+
+  <input type="submit" value="Update" />
+</form>

@@ -5,4 +5,14 @@
   </pre>
 </div>
 
-<a href="<%= post_path(@conn, :index) %>">View All</a>
+<ul>
+  <li>
+    <a href="<%= post_path(@conn, :edit, @post.id) %>">Edit</a>
+  </li>
+  <li>
+    <a href="<%= post_path(@conn, :delete, @post.id) %>" data-method="DELETE">Delete</a>
+  </li>
+  <li>
+    <a href="<%= post_path(@conn, :index) %>">View All Post</a>
+  </li>
+</ul>

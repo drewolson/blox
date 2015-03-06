@@ -1,0 +1,4 @@
+<input name="post[title]" type="text" value="<%= form_value(@form, :title) %>" />
+<input name="post[body]" type="textarea" value="<%= form_value(@form, :body) %>" />
+
+<%= render Blox.SharedView, "_csrf.html", assigns %>
