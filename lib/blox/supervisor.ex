@@ -7,7 +7,8 @@ defmodule Blox.Supervisor do
 
   def init([]) do
     children = [
-      worker(Blox.Endpoint, [])
+      worker(Blox.Endpoint, []),
+      worker(Blox.Repo, [])
     ]
 
     supervise(children, strategy: :one_for_one)

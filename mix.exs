@@ -24,6 +24,8 @@ defmodule Blox.Mixfile do
     [
       {:phoenix, github: "phoenixframework/phoenix"},
       {:cowboy, "~> 1.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:ecto, "~> 0.9.0"},
       {:ex_spec, "~> 0.3.0", only: :test}
     ]
   end

@@ -8,6 +8,14 @@ defmodule Blox.TestCase do
       use ExSpec, unquote(opts)
     end
   end
+
+  setup do
+    Ecto.Adapters.SQL.begin_test_transaction(Blox.Repo)
+
+    ExUnit.Callbacks.on_exit(fn ->
+      Ecto.Adapters.SQL.rollback_test_transaction(Blox.Repo)
+    end)
+  end
 end
 
 defmodule Blox.ControllerTestCase do

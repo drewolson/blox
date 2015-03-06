@@ -1,1 +1,3 @@
 <h1>Welcome to Blox</h1>
+
+<a href="<%= post_path(@conn, :index) %>">View Posts</a>

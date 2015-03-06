@@ -1,6 +1,5 @@
 use Mix.Config
 
-# Configures the endpoint
 config :blox, Blox.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "thisisatestvalue",

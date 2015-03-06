@@ -1,0 +1,3 @@
+<%= for post <- @posts do %>
+  <%= post.title %>
+<% end %>

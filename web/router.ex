@@ -13,5 +13,7 @@ defmodule Blox.Router do
     pipe_through :browser
 
     get "/", HomeController, :show
+
+    resources "/posts", PostController, only: [:index]
   end
 end

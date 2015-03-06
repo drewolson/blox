@@ -8,3 +8,8 @@ config :blox, Blox.Endpoint,
 config :phoenix, :code_reloader, true
 
 config :logger, :console, format: "[$level] $message\n"
+
+config :blox, Blox.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "blox_dev",
+  username: System.get_env("USER")
