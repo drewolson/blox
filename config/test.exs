@@ -8,6 +8,6 @@ config :logger, level: :warn
 config :blox, Blox.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "blox_test",
-  username: System.get_env("USER"),
+  username: System.get_env("PG_USER") || System.get_env("USER"),
   size: 1,
   max_overflow: 0
