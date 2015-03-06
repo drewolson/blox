@@ -3,6 +3,22 @@ defmodule Blox.PostControllerTest do
 
   alias Blox.Post
 
+  describe "create" do
+    it "creates a post" do
+      conn(:post, "/posts", %{
+        "post": %{
+          "title": "A title",
+          "body": "Post body"
+        }
+      }) |> send_request
+
+      post = Post |> Blox.Repo.one
+
+      assert post.title == "A title"
+      assert post.body == "Post body"
+    end
+  end
+
   describe "index" do
     it "displays posts" do
       %Post{title: "Post 1", body: "Body 1"} |> Blox.Repo.insert

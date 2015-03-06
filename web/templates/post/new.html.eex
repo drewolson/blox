@@ -2,7 +2,7 @@
   <input name="post[title]" type="text" value="<%= @post.title %>" />
   <input name="post[body]" type="textarea" value="<%= @post.body %>" />
 
-  <input type="submit">Create</input>
-
   <%= render Blox.SharedView, "_csrf.html", assigns %>
+
+  <input type="submit" value="Create" />
 </form>

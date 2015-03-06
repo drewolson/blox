@@ -5,6 +5,15 @@ defmodule Blox.PostController do
 
   plug :action
 
+  def create(conn, %{"post" => params}) do
+    post = %Post{
+      title: params["title"],
+      body: params["body"]
+    } |> Blox.Repo.insert
+
+    redirect conn, to: post_path(conn, :show, post.id)
+  end
+
   def index(conn, _params) do
     posts = Post
     |> Post.order_by_date

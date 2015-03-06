@@ -4,3 +4,5 @@
     <%= @post.body %>
   </pre>
 </div>
+
+<a href="<%= post_path(@conn, :index) %>">View All</a>
