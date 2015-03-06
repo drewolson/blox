@@ -1,6 +1,6 @@
 <form method="POST" action="<%= post_path(@conn, :create) %>">
-  <input name="post[title]" type="text" value="<%= @post.title %>" />
-  <input name="post[body]" type="textarea" value="<%= @post.body %>" />
+  <input name="post[title]" type="text" value="<%= form_value(@form, :title) %>" />
+  <input name="post[body]" type="textarea" value="<%= form_value(@form, :body) %>" />
 
   <%= render Blox.SharedView, "_csrf.html", assigns %>
 

@@ -3,15 +3,21 @@ defmodule Blox.PostController do
 
   alias Blox.Post
 
+  plug :scrub_params, "post" when action in [:create]
   plug :action
 
   def create(conn, %{"post" => params}) do
-    post = %Post{
-      title: params["title"],
-      body: params["body"]
-    } |> Blox.Repo.insert
+    changeset = Post.changeset(%Post{}, params)
 
-    redirect conn, to: post_path(conn, :show, post.id)
+    if changeset.valid? do
+      post = Blox.Repo.insert(changeset)
+
+      redirect conn, to: post_path(conn, :show, post.id)
+    else
+      form = Blox.Form.new(changeset)
+
+      render conn, :new, form: form
+    end
   end
 
   def index(conn, _params) do
@@ -24,8 +30,12 @@ defmodule Blox.PostController do
   end
 
   def new(conn, _parms) do
+    form = %Post{}
+    |> Post.changeset
+    |> Blox.Form.new
+
     render conn, :new,
-      post: %Post{}
+      form: form
   end
 
   def show(conn, %{"id" => id}) do

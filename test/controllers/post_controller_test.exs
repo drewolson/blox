@@ -17,6 +17,19 @@ defmodule Blox.PostControllerTest do
       assert post.title == "A title"
       assert post.body == "Post body"
     end
+
+    it "doesn't create a post if the paramters are invalid" do
+      conn(:post, "/posts", %{
+        "post": %{
+          "title": "",
+          "body": "Post body"
+        }
+      }) |> send_request
+
+      post = Post |> Blox.Repo.one
+
+      assert post == nil
+    end
   end
 
   describe "index" do
