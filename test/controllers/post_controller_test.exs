@@ -62,6 +62,27 @@ defmodule Blox.PostControllerTest do
       assert String.contains?(conn.resp_body, "Post 1")
       assert String.contains?(conn.resp_body, "Post 2")
     end
+
+    it "renders json" do
+      post1 = %Post{title: "Post 1", body: "Body 1"} |> Blox.Repo.insert
+      post2 = %Post{title: "Post 2", body: "Body 2"} |> Blox.Repo.insert
+
+      conn = conn(:get, "/api/v1/posts") |> send_request
+      body = Poison.Parser.parse!(conn.resp_body)
+
+      assert body == [
+        %{
+          "id" => post1.id,
+          "title" => "Post 1",
+          "body" => "Body 1"
+        },
+        %{
+          "id" => post2.id,
+          "title" => "Post 2",
+          "body" => "Body 2"
+        },
+      ]
+    end
   end
 
   describe "new" do

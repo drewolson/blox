@@ -23,6 +23,6 @@ defmodule Blox.Router do
   scope "/api/v1", Blox do
     pipe_through :api
 
-    resources "/posts", PostController, only: [:show]
+    resources "/posts", PostController, only: [:index, :show]
   end
 end
