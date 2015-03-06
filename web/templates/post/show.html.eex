@@ -10,7 +10,7 @@
     <a href="<%= post_path(@conn, :edit, @post.id) %>">Edit</a>
   </li>
   <li>
-    <a href="<%= post_path(@conn, :delete, @post.id) %>" data-method="DELETE">Delete</a>
+    <a href="<%= post_path(@conn, :delete, @post.id) %>" data-remote data-method="DELETE" data-confirm>Delete</a>
   </li>
   <li>
     <a href="<%= post_path(@conn, :index) %>">View All Post</a>

@@ -11,13 +11,19 @@ defmodule Blox.PostController do
 
     if changeset.valid? do
       post = Blox.Repo.insert(changeset)
-
       redirect conn, to: post_path(conn, :show, post.id)
     else
       form = Blox.Form.new(changeset)
-
       render conn, :new, form: form
     end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    post = Blox.Repo.get(Post, id)
+
+    Blox.Repo.delete(post)
+
+    redirect conn, to: post_path(conn, :index)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -32,6 +32,16 @@ defmodule Blox.PostControllerTest do
     end
   end
 
+  describe "delete" do
+    it "deletes the provided post" do
+      post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert
+
+      conn(:delete, "/posts/#{post.id}") |> send_request
+
+      assert Blox.Repo.get(Post, post.id) == nil
+    end
+  end
+
   describe "edit" do
     it "renders" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert
