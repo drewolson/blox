@@ -1,6 +1,4 @@
-<%= if form_errors(@form) != [] do %>
-<div>Errors!</div>
-<% end %>
+<%= render Blox.SharedView, "_errors.html", Dict.merge(assigns, form: @form) %>
 
 <form method="POST" action="<%= post_path(@conn, :create) %>">
   <%= render Blox.PostView, "_form.html", assigns %>

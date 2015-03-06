@@ -1,0 +1,3 @@
+<%= if form_errors(@form) != [] do %>
+<div>Errors!</div>
+<% end %>
