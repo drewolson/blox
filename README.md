@@ -1,5 +1,7 @@
 # Blox
 
+[![Build Status](https://travis-ci.org/drewolson/blox.svg?branch=master)](https://travis-ci.org/drewolson/blox)
+
 It's a blog?!
 
 ## Run it
