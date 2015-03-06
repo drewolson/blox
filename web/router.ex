@@ -6,6 +6,7 @@ defmodule Blox.Router do
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
+    plug Blox.Plug.CSRF
   end
 
 
@@ -14,6 +15,6 @@ defmodule Blox.Router do
 
     get "/", HomeController, :show
 
-    resources "/posts", PostController, only: [:index, :show]
+    resources "/posts", PostController, only: [:create, :index, :new, :show]
   end
 end

@@ -2,7 +2,7 @@ use Mix.Config
 
 config :blox, Blox.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "thisisatestvalue",
+  secret_key_base: "thisisatestvaluthisisatestvaluthisisatestvalueeethisisatestvalue",
   debug_errors: false,
   pubsub: [name: Blox.PubSub,
            adapter: Phoenix.PubSub.PG2]

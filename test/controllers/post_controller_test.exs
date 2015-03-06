@@ -15,6 +15,14 @@ defmodule Blox.PostControllerTest do
     end
   end
 
+  describe "new" do
+    it "renders" do
+      conn = conn(:get, "/posts/new") |> send_request
+
+      assert conn.status == 200
+    end
+  end
+
   describe "show" do
     it "displays a post and its body" do
       post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert

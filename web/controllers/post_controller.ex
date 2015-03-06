@@ -14,6 +14,11 @@ defmodule Blox.PostController do
       posts: posts
   end
 
+  def new(conn, _parms) do
+    render conn, :new,
+      post: %Post{}
+  end
+
   def show(conn, %{"id" => id}) do
     post = Blox.Repo.get(Post, id)
 

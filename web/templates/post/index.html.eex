@@ -5,3 +5,7 @@
   </li>
 <% end %>
 </ul>
+
+<div>
+  <a href="<%= post_path(@conn, :new) %>">New Post</a>
+</div>
