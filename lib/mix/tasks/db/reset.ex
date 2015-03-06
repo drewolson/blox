@@ -5,5 +5,9 @@ defmodule Mix.Tasks.Db.Reset do
     Mix.Task.run("ecto.drop", [])
     Mix.Task.run("ecto.create", [])
     Mix.Task.run("ecto.migrate", [])
+
+    if Mix.env == :dev do
+      Mix.Task.run("db.populate", [])
+    end
   end
 end

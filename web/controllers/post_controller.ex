@@ -6,7 +6,9 @@ defmodule Blox.PostController do
   plug :action
 
   def index(conn, _params) do
-    posts = Post |> Blox.Repo.all
+    posts = Post
+    |> Post.order_by_date
+    |> Blox.Repo.all
 
     render conn, :index,
       posts: posts
