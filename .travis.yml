@@ -9,4 +9,5 @@ before_script:
   - export PG_USER=postgres
   - mix local.hex --force
   - mix deps.get --only test
+  - MIX_ENV=test mix db.reset
 script: mix test
