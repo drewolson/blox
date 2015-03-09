@@ -1,4 +1,8 @@
 /_build
 /deps
+/node_modules
+/npm-debug.log
+/priv/static/css
+/priv/static/js
 erl_crash.dump
 *.ez
