@@ -4,8 +4,10 @@ config :blox, Blox.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "thisisatestvaluthisisatestvaluthisisatestvalueeethisisatestvalue",
   debug_errors: false,
-  pubsub: [name: Blox.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [
+    name: Blox.PubSub,
+    adapter: Phoenix.PubSub.PG2
+  ]
 
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

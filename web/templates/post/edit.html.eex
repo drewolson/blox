@@ -1,9 +1,7 @@
-<%= render Blox.SharedView, "_errors.html", Dict.merge(assigns, form: @form) %>
+<%= render Blox.SharedView, "_errors.html", Dict.merge(assigns, errors: @changeset.errors) %>
 
-<form method="POST" action="<%= post_path(@conn, :update, form_value(@form, :id)) %>">
-  <input name="_method" type="hidden" value="PATCH" />
+<%= form_for @changeset, post_path(@conn, :update, @changeset), fn f -> %>
+  <%= render Blox.PostView, "_form.html", Dict.merge(assigns, f: f) %>
 
-  <%= render Blox.PostView, "_form.html", assigns %>
-
-  <input type="submit" value="Update" />
-</form>
+  <%= submit "Update" %>
+<% end %>

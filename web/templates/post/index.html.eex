@@ -1,11 +1,11 @@
 <ul>
 <%= for post <- @posts do %>
   <li>
-    <a href="<%= post_path(@conn, :show, post.id) %>"><%= post.title %></a>
+    <%= link post.title, to: post_path(@conn, :show, post) %>
   </li>
 <% end %>
 </ul>
 
 <div>
-  <a href="<%= post_path(@conn, :new) %>">New Post</a>
+  <%= link "New Post", to: post_path(@conn, :new) %>
 </div>

@@ -1,7 +1,7 @@
-<%= render Blox.SharedView, "_errors.html", Dict.merge(assigns, form: @form) %>
+<%= render Blox.SharedView, "_errors.html", Dict.merge(assigns, errors: @changeset.errors) %>
 
-<form method="POST" action="<%= post_path(@conn, :create) %>">
-  <%= render Blox.PostView, "_form.html", assigns %>
+<%= form_for @changeset, post_path(@conn, :create), fn f -> %>
+  <%= render Blox.PostView, "_form.html", Dict.merge(assigns, f: f) %>
 
-  <input type="submit" value="Create" />
-</form>
+  <%= submit "Create" %>
+<% end %>

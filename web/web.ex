@@ -4,10 +4,6 @@ defmodule Blox.Web do
       use Phoenix.View, root: "web/templates"
 
       import Blox.Router.Helpers
-      import Blox.Form, only: [
-        form_errors: 1,
-        form_value: 2
-      ]
 
       use Phoenix.HTML
     end

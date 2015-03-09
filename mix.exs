@@ -5,7 +5,6 @@ defmodule Blox.Mixfile do
     [
       app: :blox,
       version: "0.0.1",
-
       elixir: "~> 1.0",
       elixirc_paths: ["lib", "web"],
       compilers: [:phoenix] ++ Mix.compilers,
@@ -16,7 +15,7 @@ defmodule Blox.Mixfile do
   def application do
     [
       mod: {Blox, []},
-      applications: [:phoenix, :cowboy, :logger]
+      applications: [:phoenix, :cowboy, :logger, :phoenix_ecto]
     ]
   end
 
@@ -26,6 +25,7 @@ defmodule Blox.Mixfile do
       {:cowboy, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 0.9.0"},
+      {:phoenix_ecto, "~> 0.1.0"},
       {:ex_spec, "~> 0.3.0", only: :test}
     ]
   end

@@ -13,8 +13,7 @@ defmodule Blox.PostController do
       post = Blox.Repo.insert(changeset)
       redirect conn, to: post_path(conn, :show, post.id)
     else
-      form = Blox.Form.new(changeset)
-      render conn, :new, form: form
+      render conn, :new, changeset: changeset
     end
   end
 
@@ -27,13 +26,12 @@ defmodule Blox.PostController do
   end
 
   def edit(conn, %{"id" => id}) do
-    form = Post
+    changeset = Post
     |> Blox.Repo.get(id)
     |> Post.changeset
-    |> Blox.Form.new
 
     render conn, :edit,
-      form: form
+      changeset: changeset
   end
 
   def index(conn, _params) do
@@ -46,12 +44,11 @@ defmodule Blox.PostController do
   end
 
   def new(conn, _parms) do
-    form = %Post{}
+    changeset = %Post{}
     |> Post.changeset
-    |> Blox.Form.new
 
     render conn, :new,
-      form: form
+      changeset: changeset
   end
 
   def show(conn, %{"id" => id}) do
@@ -70,8 +67,7 @@ defmodule Blox.PostController do
       post = Blox.Repo.update(changeset)
       redirect conn, to: post_path(conn, :show, post.id)
     else
-      form = Blox.Form.new(changeset)
-      render conn, :edit, form: form
+      render conn, :edit, changeset: changeset
     end
   end
 end
