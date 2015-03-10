@@ -11,7 +11,7 @@ defmodule Blox.PostController do
 
     if changeset.valid? do
       post = Blox.Repo.insert(changeset)
-      redirect conn, to: post_path(conn, :show, post.id)
+      redirect conn, to: post_path(conn, :show, post)
     else
       render conn, :new, changeset: changeset
     end
@@ -65,7 +65,7 @@ defmodule Blox.PostController do
 
     if changeset.valid? do
       post = Blox.Repo.update(changeset)
-      redirect conn, to: post_path(conn, :show, post.id)
+      redirect conn, to: post_path(conn, :show, post)
     else
       render conn, :edit, changeset: changeset
     end
