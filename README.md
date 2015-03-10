@@ -26,4 +26,4 @@ mix test
 
 ## Assumptions
 
-Blox assumes you're running postgres locally on the default port and that your curernt user can create databases.
+Blox assumes you're running postgres locally on the default port and that your current user can create databases.
