@@ -4,10 +4,16 @@
 
 It's a blog?!
 
-## Run it
+## Setup
 
 ```bash
 mix do deps.get, db.reset
+npm install
+```
+
+## Run it
+
+```bash
 mix phoenix.server
 ```
 
