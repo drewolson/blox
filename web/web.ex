@@ -4,6 +4,10 @@ defmodule Blox.Web do
       use Phoenix.View, root: "web/templates"
 
       import Blox.Router.Helpers
+      import Phoenix.Controller, only: [
+        get_flash: 2,
+        get_csrf_token: 0
+      ]
 
       use Phoenix.HTML
     end

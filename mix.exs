@@ -21,11 +21,12 @@ defmodule Blox.Mixfile do
 
   defp deps do
     [
-      {:phoenix, "~> 0.10.0"},
+      {:phoenix, "~> 0.11.0"},
       {:cowboy, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 0.9.0"},
-      {:phoenix_ecto, "~> 0.1.0"},
+      {:ecto, "~> 0.10.0"},
+      {:phoenix_ecto, "~> 0.3.2"},
+      {:phoenix_live_reload, "~> 0.3"},
       {:ex_spec, "~> 0.3.0", only: :test}
     ]
   end

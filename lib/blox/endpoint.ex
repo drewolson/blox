@@ -7,7 +7,10 @@ defmodule Blox.Endpoint do
 
   plug Plug.Logger
 
-  plug Phoenix.CodeReloader
+  if code_reloading? do
+    plug Phoenix.LiveReloader
+    plug Phoenix.CodeReloader
+  end
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
