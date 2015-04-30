@@ -8,6 +8,8 @@ defmodule Blox.Mixfile do
       elixir: "~> 1.0",
       elixirc_paths: ["lib", "web"],
       compilers: [:phoenix] ++ Mix.compilers,
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
       deps: deps
     ]
   end
