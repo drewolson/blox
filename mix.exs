@@ -23,7 +23,7 @@ defmodule Blox.Mixfile do
 
   defp deps do
     [
-      {:phoenix, "~> 0.11.0"},
+      {:phoenix, "~> 0.12.0"},
       {:cowboy, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 0.10.0"},
