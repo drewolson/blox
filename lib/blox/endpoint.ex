@@ -23,8 +23,7 @@ defmodule Blox.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_blox_key",
-    signing_salt: "thisisatestvalue",
-    encryption_salt: "thisisatestvalue"
+    signing_salt: "thisisatestvalue"
 
   plug :router, Blox.Router
 end
