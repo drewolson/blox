@@ -1,6 +1,8 @@
 defmodule Blox.Post do
   use Ecto.Model
 
+  import Ecto.Query
+
   schema "posts" do
     field :title, :string
     field :body,  :string
@@ -8,7 +10,7 @@ defmodule Blox.Post do
     timestamps
   end
 
-  def changeset(post, params \\ nil) do
+  def changeset(post, params \\ :empty) do
     post
     |> cast(params, ~w(title body))
   end
