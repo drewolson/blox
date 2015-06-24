@@ -10,7 +10,7 @@ defmodule Blox.PostController do
     changeset = Post.changeset(%Post{}, params)
 
     if changeset.valid? do
-      post = Blox.Repo.insert(changeset)
+      post = Blox.Repo.insert!(changeset)
       redirect conn, to: post_path(conn, :show, post)
     else
       render conn, :new, changeset: changeset
@@ -20,7 +20,7 @@ defmodule Blox.PostController do
   def delete(conn, %{"id" => id}) do
     post = Blox.Repo.get(Post, id)
 
-    Blox.Repo.delete(post)
+    Blox.Repo.delete!(post)
 
     redirect conn, to: post_path(conn, :index)
   end
@@ -64,7 +64,7 @@ defmodule Blox.PostController do
     |> Post.changeset(params)
 
     if changeset.valid? do
-      post = Blox.Repo.update(changeset)
+      post = Blox.Repo.update!(changeset)
       redirect conn, to: post_path(conn, :show, post)
     else
       render conn, :edit, changeset: changeset
