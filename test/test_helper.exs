@@ -29,10 +29,8 @@ defmodule Blox.ControllerTestCase do
       use Phoenix.ConnTest
 
       import Blox.ControllerTestCase
-      import Ecto.Query
-
-      # Import URL helpers from the router
       import Blox.Router.Helpers
+      import Ecto.Query
     end
   end
 

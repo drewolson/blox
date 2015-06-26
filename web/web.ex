@@ -1,6 +1,7 @@
 defmodule Blox.Web do
   def view do
     quote do
+      use Phoenix.HTML
       use Phoenix.View, root: "web/templates"
 
       import Blox.Router.Helpers
@@ -8,8 +9,6 @@ defmodule Blox.Web do
         get_flash: 2,
         get_csrf_token: 0
       ]
-
-      use Phoenix.HTML
     end
   end
 
@@ -18,7 +17,6 @@ defmodule Blox.Web do
       use Phoenix.Controller
 
       import Blox.Router.Helpers
-
       import Ecto.Model, only: [build: 2]
     end
   end
