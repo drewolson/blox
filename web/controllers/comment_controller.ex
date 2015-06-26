@@ -10,7 +10,10 @@ defmodule Blox.CommentController do
   plug :action
 
   def create(conn, %{"post_id" => post_id, "comment" => params}) do
-    changeset = %Comment{post_id: String.to_integer(post_id)}
+    post = Blox.Repo.get(Post, post_id)
+
+    changeset = post
+    |> build(:comments)
     |> Comment.changeset(params)
 
     if changeset.valid? do
