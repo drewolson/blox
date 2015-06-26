@@ -26,12 +26,7 @@ defmodule Blox.CommentController do
 
   def delete(conn, %{"id" => id}) do
     post = conn.assigns[:post]
-
-    comment = Comment
-    |> where([c], c.id == ^id)
-    |> where([c], c.post_id == ^post.id)
-    |> Blox.Repo.one!
-
+    comment = post |> Ecto.Model.assoc(:comments) |> Blox.Repo.get(id)
     Blox.Repo.delete!(comment)
 
     redirect conn, to: post_path(conn, :show, post)
