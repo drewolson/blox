@@ -17,7 +17,9 @@ defmodule Blox.Router do
 
     get "/", HomeController, :show
 
-    resources "/posts", PostController
+    resources "/posts", PostController do
+      resources "/comments", CommentController
+    end
   end
 
   scope "/api/v1", Blox do

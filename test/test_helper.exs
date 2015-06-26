@@ -29,6 +29,7 @@ defmodule Blox.ControllerTestCase do
       use Plug.Test
 
       import Blox.ControllerTestCase
+      import Ecto.Query
     end
   end
 
