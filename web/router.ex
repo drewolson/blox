@@ -18,7 +18,7 @@ defmodule Blox.Router do
     get "/", HomeController, :show
 
     resources "/posts", PostController do
-      resources "/comments", CommentController
+      resources "/comments", CommentController, only: [:create, :delete]
     end
   end
 

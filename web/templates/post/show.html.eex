@@ -9,7 +9,10 @@
   <h2>Comments</h2>
   <ul>
     <%= for comment <- @post.comments do %>
-      <li><%= comment.body %></li>
+      <li>
+        <%= comment.body %> -
+        <%= link "Delete", to: post_comment_path(@conn, :delete, @post, comment), "data-remote": true, "data-confirm": true, "data-method": "DELETE" %>
+      </li>
     <% end %>
   </ul>
 </div>

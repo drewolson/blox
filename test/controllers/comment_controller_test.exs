@@ -1,6 +1,7 @@
 defmodule Blox.CommentControllerTest do
   use Blox.ControllerTestCase
 
+  alias Blox.Comment
   alias Blox.Post
 
   describe "create" do
@@ -34,6 +35,19 @@ defmodule Blox.CommentControllerTest do
       post = Post
       |> preload(:comments)
       |> Blox.Repo.one
+
+      assert post.comments == []
+    end
+  end
+
+  describe "delete" do
+    it "deletes a comment" do
+      post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
+      comment = %Comment{post_id: post.id, body: "A comment!"} |> Blox.Repo.insert!
+
+      conn(:delete, "/posts/#{post.id}/comments/#{comment.id}") |> send_request
+
+      post = Post.find(post.id) |> Blox.Repo.one!
 
       assert post.comments == []
     end
