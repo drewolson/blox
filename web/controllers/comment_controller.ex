@@ -30,8 +30,8 @@ defmodule Blox.CommentController do
     redirect conn, to: post_path(conn, :show, post)
   end
 
-  def find_post(conn, _key_values) do
-    post = Blox.Repo.get(Post, Map.get(conn.params, "post_id"))
+  def find_post(conn, _opts) do
+    post = Blox.Repo.get(Post, conn.params["post_id"])
 
     if post do
       conn |> assign(:post, post)
