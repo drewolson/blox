@@ -26,10 +26,13 @@ defmodule Blox.ControllerTestCase do
   using(opts) do
     quote do
       use Blox.TestCase, unquote(opts)
-      use Plug.Test
+      use Phoenix.ConnTest
 
       import Blox.ControllerTestCase
       import Ecto.Query
+
+      # Import URL helpers from the router
+      import Blox.Router.Helpers
     end
   end
 
