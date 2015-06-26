@@ -3,7 +3,8 @@ defimpl Poison.Encoder, for: Blox.Post do
     %{
       id: post.id,
       title: post.title,
-      body: post.body
+      body: post.body,
+      comments: post.comments
     } |> Poison.Encoder.encode(options)
   end
 end

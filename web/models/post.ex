@@ -29,4 +29,8 @@ defmodule Blox.Post do
   def order_by_date(query) do
     query |> order_by([p], desc: p.updated_at)
   end
+
+  def with_comments(query) do
+    query |> preload(:comments)
+  end
 end

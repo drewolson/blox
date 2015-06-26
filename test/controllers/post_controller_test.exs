@@ -75,12 +75,14 @@ defmodule Blox.PostControllerTest do
         %{
           "id" => post1.id,
           "title" => "Post 1",
-          "body" => "Body 1"
+          "body" => "Body 1",
+          "comments" => []
         },
         %{
           "id" => post2.id,
           "title" => "Post 2",
-          "body" => "Body 2"
+          "body" => "Body 2",
+          "comments" => []
         },
       ]
     end
@@ -113,8 +115,9 @@ defmodule Blox.PostControllerTest do
       assert String.contains?(conn.resp_body, "I have the worst lawyers")
     end
 
-    it "renders json" do
+    it "renders json with comments" do
       post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert!
+      comment = %Comment{post_id: post.id, body: "I have the worst lawyers"} |> Blox.Repo.insert!
 
       conn = conn(:get, "/api/v1/posts/#{post.id}") |> send_request
 
@@ -123,7 +126,13 @@ defmodule Blox.PostControllerTest do
       assert body == %{
         "id" => post.id,
         "title" => "Bob Loblaw",
-        "body" => "Some lawyer-y stuff goes here"
+        "body" => "Some lawyer-y stuff goes here",
+        "comments" => [
+          %{
+            "id" => comment.id,
+            "body" => "I have the worst lawyers"
+          }
+        ]
       }
     end
   end

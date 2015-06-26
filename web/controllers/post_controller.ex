@@ -37,6 +37,7 @@ defmodule Blox.PostController do
   def index(conn, _params) do
     posts = Post
     |> Post.order_by_date
+    |> Post.with_comments
     |> Blox.Repo.all
 
     render conn, :index,
