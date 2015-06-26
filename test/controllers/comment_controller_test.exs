@@ -21,5 +21,21 @@ defmodule Blox.CommentControllerTest do
 
       assert comment.body == "Comment body"
     end
+
+    it "requires a body" do
+      post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
+
+      conn(:post, "/posts/#{post.id}/comments", %{
+        "comment": %{
+          "body": ""
+        }
+      }) |> send_request
+
+      post = Post
+      |> preload(:comments)
+      |> Blox.Repo.one
+
+      assert post.comments == []
+    end
   end
 end
