@@ -3,7 +3,6 @@ defmodule Blox.Post do
 
   import Ecto.Query
 
-  alias Blox.Post
   alias Blox.Comment
 
   schema "posts" do
@@ -18,12 +17,6 @@ defmodule Blox.Post do
   def changeset(post, params \\ :empty) do
     post
     |> cast(params, ~w(title body))
-  end
-
-  def find(id) do
-    Post
-    |> where([p], p.id == ^id)
-    |> preload(:comments)
   end
 
   def order_by_date(query) do

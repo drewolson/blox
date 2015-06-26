@@ -57,7 +57,7 @@ defmodule Blox.CommentControllerTest do
 
       conn(:delete, "/posts/#{post.id}/comments/#{comment.id}") |> send_request
 
-      post = Post.find(post.id) |> Blox.Repo.one!
+      post = Post |> Post.with_comments |> Blox.Repo.get(post.id)
 
       assert post.comments == []
     end
