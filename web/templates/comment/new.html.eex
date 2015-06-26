@@ -1,6 +1,6 @@
 <%= render Blox.SharedView, "_errors.html", Dict.merge(assigns, errors: @changeset.errors) %>
 
-<%= form_for @changeset, post_comment_path(@conn, :create, @post_id), fn f -> %>
+<%= form_for @changeset, :create, fn f -> %>
   <%= text_input f, :body %>
 
   <%= submit "Create" %>

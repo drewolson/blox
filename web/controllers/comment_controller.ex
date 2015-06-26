@@ -7,11 +7,11 @@ defmodule Blox.CommentController do
   alias Blox.Post
 
   plug :scrub_params, "comment" when action in [:create]
+  plug :find_post!
   plug :action
 
-  def create(conn, %{"post_id" => post_id, "comment" => params}) do
-    post = Blox.Repo.get(Post, post_id)
-
+  def create(conn, %{"comment" => params}) do
+    post = conn.assigns[:post]
     changeset = post
     |> build(:comments)
     |> Comment.changeset(params)
@@ -20,14 +20,12 @@ defmodule Blox.CommentController do
       comment = Blox.Repo.insert!(changeset)
       redirect conn, to: post_path(conn, :show, comment.post_id)
     else
-      render conn, :new,
-        changeset: changeset,
-        post_id: post_id
+      render conn, :new, changeset: changeset
     end
   end
 
-  def delete(conn, %{"post_id" => post_id, "id" => id}) do
-    post = Blox.Repo.get(Post, post_id)
+  def delete(conn, %{"id" => id}) do
+    post = conn.assigns[:post]
 
     comment = Comment
     |> where([c], c.id == ^id)
@@ -37,5 +35,20 @@ defmodule Blox.CommentController do
     Blox.Repo.delete!(comment)
 
     redirect conn, to: post_path(conn, :show, post)
+  end
+
+  def find_post!(conn, _key_values) do
+    post = Blox.Repo.get_by(Post, %{"id": Map.get(conn.params, "post_id")})
+    case post do
+      nil  -> find_post_error!(conn)
+      post -> assign(conn, :post, post)
+    end
+  end
+
+  defp find_post_error!(conn) do
+    conn
+    |> put_flash(:error, "Post not found")
+    |> redirect(to: post_path(conn, :index))
+    |> halt
   end
 end

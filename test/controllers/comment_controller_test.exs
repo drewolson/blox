@@ -40,6 +40,16 @@ defmodule Blox.CommentControllerTest do
     end
   end
 
+  it "redirects when no post is found" do
+    conn = conn(:post, "/posts/-1/comments", %{
+      "comment": %{
+        "body": ""
+      }
+    }) |> send_request
+    assert redirected_to(conn) == post_path(conn, :index)
+    assert get_flash(conn, :error) == "Post not found"
+  end
+
   describe "delete" do
     it "deletes a comment" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
