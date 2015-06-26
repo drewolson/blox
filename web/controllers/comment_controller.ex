@@ -1,8 +1,6 @@
 defmodule Blox.CommentController do
   use Blox.Web, :controller
 
-  import Ecto.Query
-
   alias Blox.Comment
   alias Blox.Post
 
