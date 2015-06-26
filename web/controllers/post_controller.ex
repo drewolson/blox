@@ -1,6 +1,7 @@
 defmodule Blox.PostController do
   use Blox.Web, :controller
 
+  alias Blox.Comment
   alias Blox.Post
 
   plug :scrub_params, "post" when action in [:create, :update]
@@ -54,8 +55,10 @@ defmodule Blox.PostController do
 
   def show(conn, %{"id" => id}) do
     post = id |> Post.find |> Blox.Repo.one!
+    new_comment = %Comment{post_id: id} |> Comment.changeset
 
     render conn, :show,
+      new_comment: new_comment,
       post: post
   end
 

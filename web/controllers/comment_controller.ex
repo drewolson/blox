@@ -14,7 +14,9 @@ defmodule Blox.CommentController do
       comment = Blox.Repo.insert!(changeset)
       redirect conn, to: post_path(conn, :show, comment.post_id)
     else
-      render conn, :new, changeset: changeset
+      render conn, :new,
+        changeset: changeset,
+        post_id: post_id
     end
   end
 end

@@ -14,6 +14,14 @@
   </ul>
 </div>
 
+<div>
+  <h2>Add Comment</h2>
+  <%= form_for @new_comment, post_comment_path(@conn, :create, @post), fn f -> %>
+    <%= text_input f, :body %>
+    <%= submit "Create" %>
+  <% end %>
+</div>
+
 <ul>
   <li>
     <%= link "Edit", to: post_path(@conn, :edit, @post) %>
