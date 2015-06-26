@@ -5,6 +5,15 @@
   </pre>
 </div>
 
+<div>
+  <h2>Comments</h2>
+  <ul>
+    <%= for comment <- @post.comments do %>
+      <li><%= comment.body %></li>
+    <% end %>
+  </ul>
+</div>
+
 <ul>
   <li>
     <%= link "Edit", to: post_path(@conn, :edit, @post) %>

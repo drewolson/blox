@@ -1,6 +1,7 @@
 defmodule Blox.PostControllerTest do
   use Blox.ControllerTestCase
 
+  alias Blox.Comment
   alias Blox.Post
 
   describe "create" do
@@ -101,6 +102,15 @@ defmodule Blox.PostControllerTest do
 
       assert String.contains?(conn.resp_body, "Bob Loblaw")
       assert String.contains?(conn.resp_body, "Some lawyer-y stuff goes here")
+    end
+
+    it "includes comments" do
+      post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert!
+      %Comment{post_id: post.id, body: "I have the worst lawyers"} |> Blox.Repo.insert!
+
+      conn = conn(:get, "/posts/#{post.id}") |> send_request
+
+      assert String.contains?(conn.resp_body, "I have the worst lawyers")
     end
 
     it "renders json" do

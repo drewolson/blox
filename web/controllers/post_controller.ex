@@ -52,7 +52,7 @@ defmodule Blox.PostController do
   end
 
   def show(conn, %{"id" => id}) do
-    post = Blox.Repo.get(Post, id)
+    post = id |> Post.find |> Blox.Repo.one!
 
     render conn, :show,
       post: post
