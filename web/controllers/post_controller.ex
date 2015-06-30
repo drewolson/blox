@@ -5,7 +5,6 @@ defmodule Blox.PostController do
   alias Blox.Post
 
   plug :scrub_params, "post" when action in [:create, :update]
-  plug :action
 
   def create(conn, %{"post" => params}) do
     changeset = Post.changeset(%Post{}, params)

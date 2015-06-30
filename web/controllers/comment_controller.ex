@@ -6,7 +6,6 @@ defmodule Blox.CommentController do
 
   plug :scrub_params, "comment" when action in [:create]
   plug :find_post
-  plug :action
 
   def create(conn, %{"comment" => params}) do
     post = conn.assigns[:post]
