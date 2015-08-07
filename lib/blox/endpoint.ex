@@ -10,6 +10,8 @@ defmodule Blox.Endpoint do
   if code_reloading? do
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
+
+    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
   end
 
   plug Plug.Parsers,
@@ -25,5 +27,5 @@ defmodule Blox.Endpoint do
     key: "_blox_key",
     signing_salt: "thisisatestvalue"
 
-  plug :router, Blox.Router
+  plug Blox.Router
 end

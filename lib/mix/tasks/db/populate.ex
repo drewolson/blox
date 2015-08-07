@@ -4,6 +4,8 @@ defmodule Mix.Tasks.Db.Populate do
   alias Blox.Post
 
   def run(_args) do
+    Mix.Task.run("app.start", [])
+
     %Post{
       title: "Elixir is great",
       body: "Here is a bunch of info about Elixir."

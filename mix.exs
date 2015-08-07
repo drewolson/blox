@@ -23,13 +23,13 @@ defmodule Blox.Mixfile do
 
   defp deps do
     [
-      {:phoenix, "~> 0.14.0"},
+      {:phoenix, "~> 0.16.0"},
       {:cowboy, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 0.13.0"},
-      {:phoenix_ecto, "~> 0.5"},
-      {:phoenix_live_reload, "~> 0.4"},
-      {:phoenix_html, "~> 1.0"},
+      {:ecto, "~> 0.15.0"},
+      {:phoenix_ecto, "~> 1.0"},
+      {:phoenix_live_reload, "~> 0.6"},
+      {:phoenix_html, "~> 2.1"},
       {:ex_spec, "~> 0.3.0", only: :test}
     ]
   end

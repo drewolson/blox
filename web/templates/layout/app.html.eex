@@ -15,6 +15,6 @@
 
   <body>
     <%= @inner %>
-    <script>require("web/static/js/jquery-ujs");</script>
+    <script>require("web/static/js/app");</script>
   </body>
 </html>
