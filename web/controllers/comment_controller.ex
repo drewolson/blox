@@ -13,11 +13,12 @@ defmodule Blox.CommentController do
     |> build(:comments)
     |> Comment.changeset(params)
 
-    if changeset.valid? do
-      comment = Blox.Repo.insert!(changeset)
-      redirect conn, to: post_path(conn, :show, comment.post_id)
-    else
-      render conn, :new, changeset: changeset
+    case Blox.Repo.insert(changeset) do
+      {:ok, comment} ->
+        redirect conn, to: post_path(conn, :show, comment.post_id)
+
+      {:error, changeset} ->
+        render conn, :new, changeset: changeset
     end
   end
 

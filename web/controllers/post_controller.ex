@@ -9,11 +9,12 @@ defmodule Blox.PostController do
   def create(conn, %{"post" => params}) do
     changeset = Post.changeset(%Post{}, params)
 
-    if changeset.valid? do
-      post = Blox.Repo.insert!(changeset)
-      redirect conn, to: post_path(conn, :show, post)
-    else
-      render conn, :new, changeset: changeset
+    case Blox.Repo.insert(changeset) do
+      {:ok, post} ->
+        redirect conn, to: post_path(conn, :show, post)
+
+      {:error, changeset} ->
+        render conn, :new, changeset: changeset
     end
   end
 
@@ -66,11 +67,12 @@ defmodule Blox.PostController do
     |> Blox.Repo.get(id)
     |> Post.changeset(params)
 
-    if changeset.valid? do
-      post = Blox.Repo.update!(changeset)
-      redirect conn, to: post_path(conn, :show, post)
-    else
-      render conn, :edit, changeset: changeset
+    case Blox.Repo.update(changeset) do
+      {:ok, post} ->
+        redirect conn, to: post_path(conn, :show, post)
+
+      {:error, changeset} ->
+        render conn, :edit, changeset: changeset
     end
   end
 end
