@@ -15,8 +15,7 @@ defmodule Blox.Post do
   end
 
   def changeset(post, params \\ :empty) do
-    post
-    |> cast(params, ~w(title body))
+    post |> cast(params, ~w(title body))
   end
 
   def order_by_date(query) do

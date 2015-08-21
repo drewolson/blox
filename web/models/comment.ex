@@ -12,7 +12,6 @@ defmodule Blox.Comment do
   end
 
   def changeset(comment, params \\ :empty) do
-    comment
-    |> cast(params, ~w(body))
+    comment |> cast(params, ~w(body))
   end
 end
