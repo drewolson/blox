@@ -17,7 +17,14 @@ defmodule Blox.Mixfile do
   def application do
     [
       mod: {Blox, []},
-      applications: [:phoenix, :cowboy, :logger, :phoenix_ecto]
+      applications: [
+        :phoenix,
+        :cowboy,
+        :logger,
+        :postgrex,
+        :ecto,
+        :phoenix_ecto
+      ]
     ]
   end
 
