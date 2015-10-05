@@ -1,5 +1,5 @@
 <ul>
-<%= for post <- @posts do %>
+<%= for post <- @page.entries do %>
   <li>
     <%= link post.title, to: post_path(@conn, :show, post) %>
   </li>

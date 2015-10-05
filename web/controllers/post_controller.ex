@@ -35,14 +35,14 @@ defmodule Blox.PostController do
       changeset: changeset
   end
 
-  def index(conn, _params) do
-    posts = Post
+  def index(conn, params) do
+    page = Post
     |> Post.order_by_date
     |> Post.with_comments
-    |> Blox.Repo.all
+    |> Blox.Repo.paginate(params)
 
     render conn, :index,
-      posts: posts
+      page: page
   end
 
   def new(conn, _parms) do

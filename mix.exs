@@ -37,6 +37,7 @@ defmodule Blox.Mixfile do
       {:phoenix_ecto, "~> 1.0"},
       {:phoenix_live_reload, "~> 1.0"},
       {:phoenix_html, "~> 2.0"},
+      {:scrivener, "~> 1.0"},
       {:ex_spec, "~> 0.3.0", only: :test}
     ]
   end
