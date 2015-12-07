@@ -21,23 +21,16 @@ end
 defmodule Blox.ControllerTestCase do
   use ExUnit.CaseTemplate
 
-  import Plug.Conn
-
   using(opts) do
     quote do
       use Blox.TestCase, unquote(opts)
       use Phoenix.ConnTest
 
-      import Blox.ControllerTestCase
       import Blox.Router.Helpers
       import Ecto.Query
-    end
-  end
 
-  def send_request(conn) do
-    conn
-    |> put_private(:plug_skip_csrf_protection, true)
-    |> Blox.Endpoint.call([])
+      @endpoint Blox.Endpoint
+    end
   end
 end
 

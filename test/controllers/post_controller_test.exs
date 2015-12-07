@@ -6,12 +6,12 @@ defmodule Blox.PostControllerTest do
 
   describe "create" do
     it "creates a post" do
-      conn(:post, "/posts", %{
+      post(conn, "/posts", %{
         "post": %{
           "title": "A title",
           "body": "Post body"
         }
-      }) |> send_request
+      })
 
       post = Post |> Blox.Repo.one
 
@@ -20,12 +20,12 @@ defmodule Blox.PostControllerTest do
     end
 
     it "doesn't create a post if the paramters are invalid" do
-      conn(:post, "/posts", %{
+      post(conn, "/posts", %{
         "post": %{
           "title": "",
           "body": "Post body"
         }
-      }) |> send_request
+      })
 
       post = Post |> Blox.Repo.one
 
@@ -37,7 +37,7 @@ defmodule Blox.PostControllerTest do
     it "deletes the provided post" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
-      conn(:delete, "/posts/#{post.id}") |> send_request
+      delete(conn, "/posts/#{post.id}")
 
       assert Blox.Repo.get(Post, post.id) == nil
     end
@@ -47,7 +47,7 @@ defmodule Blox.PostControllerTest do
     it "renders" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
-      conn = conn(:get, "/posts/#{post.id}/edit") |> send_request
+      conn = get(conn, "/posts/#{post.id}/edit")
 
       assert conn.status == 200
     end
@@ -58,7 +58,7 @@ defmodule Blox.PostControllerTest do
       %Post{title: "Post 1", body: "Body 1"} |> Blox.Repo.insert!
       %Post{title: "Post 2", body: "Body 2"} |> Blox.Repo.insert!
 
-      conn = conn(:get, "/posts") |> send_request
+      conn = get(conn, "/posts")
 
       assert String.contains?(conn.resp_body, "Post 1")
       assert String.contains?(conn.resp_body, "Post 2")
@@ -68,7 +68,7 @@ defmodule Blox.PostControllerTest do
       post1 = %Post{title: "Post 1", body: "Body 1"} |> Blox.Repo.insert!
       post2 = %Post{title: "Post 2", body: "Body 2"} |> Blox.Repo.insert!
 
-      conn = conn(:get, "/api/v1/posts") |> send_request
+      conn = get(conn, "/api/v1/posts")
       body = Poison.Parser.parse!(conn.resp_body)
 
       assert body == [
@@ -90,7 +90,7 @@ defmodule Blox.PostControllerTest do
 
   describe "new" do
     it "renders" do
-      conn = conn(:get, "/posts/new") |> send_request
+      conn = get(conn, "/posts/new")
 
       assert conn.status == 200
     end
@@ -100,7 +100,7 @@ defmodule Blox.PostControllerTest do
     it "displays a post and its body" do
       post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert!
 
-      conn = conn(:get, "/posts/#{post.id}") |> send_request
+      conn = get(conn, "/posts/#{post.id}")
 
       assert String.contains?(conn.resp_body, "Bob Loblaw")
       assert String.contains?(conn.resp_body, "Some lawyer-y stuff goes here")
@@ -110,7 +110,7 @@ defmodule Blox.PostControllerTest do
       post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert!
       %Comment{post_id: post.id, body: "I have the worst lawyers"} |> Blox.Repo.insert!
 
-      conn = conn(:get, "/posts/#{post.id}") |> send_request
+      conn = get(conn, "/posts/#{post.id}")
 
       assert String.contains?(conn.resp_body, "I have the worst lawyers")
     end
@@ -119,7 +119,7 @@ defmodule Blox.PostControllerTest do
       post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert!
       comment = %Comment{post_id: post.id, body: "I have the worst lawyers"} |> Blox.Repo.insert!
 
-      conn = conn(:get, "/api/v1/posts/#{post.id}") |> send_request
+      conn = get(conn, "/api/v1/posts/#{post.id}")
 
       body = Poison.Parser.parse!(conn.resp_body)
 
@@ -141,12 +141,12 @@ defmodule Blox.PostControllerTest do
     it "updates the post with the provided values" do
       post = %Post{title: "1", body: "1"} |> Blox.Repo.insert!
 
-      conn(:patch, "/posts/#{post.id}", %{
+      patch(conn, "/posts/#{post.id}", %{
         "post": %{
           "title": "2",
           "body": "2"
         }
-      }) |> send_request
+      })
 
       post = Blox.Repo.get(Post, post.id)
 
@@ -157,12 +157,12 @@ defmodule Blox.PostControllerTest do
     it "doesn't update on validation errors" do
       post = %Post{title: "1", body: "1"} |> Blox.Repo.insert!
 
-      conn(:patch, "/posts/#{post.id}", %{
+      patch(conn, "/posts/#{post.id}", %{
         "post": %{
           "title": "2",
           "body": ""
         }
-      }) |> send_request
+      })
 
       post = Blox.Repo.get(Post, post.id)
 

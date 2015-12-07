@@ -8,11 +8,11 @@ defmodule Blox.CommentControllerTest do
     it "creates a comment" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
-      conn(:post, "/posts/#{post.id}/comments", %{
+      post(conn, "/posts/#{post.id}/comments", %{
         "comment": %{
           "body": "Comment body"
         }
-      }) |> send_request
+      })
 
       post = Post
       |> preload(:comments)
@@ -26,11 +26,11 @@ defmodule Blox.CommentControllerTest do
     it "requires a body" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
-      conn(:post, "/posts/#{post.id}/comments", %{
+      post(conn, "/posts/#{post.id}/comments", %{
         "comment": %{
           "body": ""
         }
-      }) |> send_request
+      })
 
       post = Post
       |> preload(:comments)
@@ -41,11 +41,12 @@ defmodule Blox.CommentControllerTest do
   end
 
   it "redirects when no post is found" do
-    conn = conn(:post, "/posts/-1/comments", %{
+    conn = post(conn, "/posts/-1/comments", %{
       "comment": %{
         "body": ""
       }
-    }) |> send_request
+    })
+
     assert redirected_to(conn) == post_path(conn, :index)
     assert get_flash(conn, :error) == "Post not found"
   end
@@ -55,7 +56,7 @@ defmodule Blox.CommentControllerTest do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
       comment = %Comment{post_id: post.id, body: "A comment!"} |> Blox.Repo.insert!
 
-      conn(:delete, "/posts/#{post.id}/comments/#{comment.id}") |> send_request
+      delete(conn, "/posts/#{post.id}/comments/#{comment.id}")
 
       post = Post |> Post.with_comments |> Blox.Repo.get(post.id)
 
