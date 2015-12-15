@@ -1,6 +1,7 @@
 defmodule Blox.Post do
-  use Ecto.Model
+  use Ecto.Schema
 
+  import Ecto.Changeset
   import Ecto.Query
 
   alias Blox.Comment

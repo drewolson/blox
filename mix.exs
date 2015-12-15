@@ -34,7 +34,7 @@ defmodule Blox.Mixfile do
       {:cowboy, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 1.0"},
-      {:phoenix_ecto, "~> 1.0"},
+      {:phoenix_ecto, "~> 2.0"},
       {:phoenix_live_reload, "~> 1.0"},
       {:phoenix_html, "~> 2.0"},
       {:ex_spec, "~> 1.0", only: :test}
