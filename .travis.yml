@@ -2,7 +2,7 @@ language: elixir
 otp_release:
   - 17.4
 elixir:
-  - 1.0.4
+  - 1.1.1
 before_script:
   - export PG_USER=postgres
   - mix local.hex --force
