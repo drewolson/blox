@@ -10,7 +10,7 @@
     "clean-css-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
     "javascript-brunch": ">= 1.0 < 1.8",
-    "sass-brunch": "git://github.com/brunch/sass-brunch.git#master",
+    "sass-brunch": "^2.0.0",
     "uglify-js-brunch": ">= 1.0 < 1.8"
   }
 }
