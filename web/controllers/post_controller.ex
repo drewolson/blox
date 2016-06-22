@@ -27,27 +27,28 @@ defmodule Blox.PostController do
   end
 
   def edit(conn, %{"id" => id}) do
-    changeset = Post
-    |> Blox.Repo.get(id)
-    |> Post.changeset
+    changeset =
+      Post
+      |> Blox.Repo.get(id)
+      |> Post.changeset
 
     render conn, :edit,
       changeset: changeset
   end
 
   def index(conn, _params) do
-    posts = Post
-    |> Post.order_by_date
-    |> Post.with_comments
-    |> Blox.Repo.all
+    posts =
+      Post
+      |> Post.order_by_date
+      |> Post.with_comments
+      |> Blox.Repo.all
 
     render conn, :index,
       posts: posts
   end
 
   def new(conn, _parms) do
-    changeset = %Post{}
-    |> Post.changeset
+    changeset = Post.changeset(%Post{})
 
     render conn, :new,
       changeset: changeset
@@ -67,9 +68,10 @@ defmodule Blox.PostController do
   end
 
   def update(conn, %{"id" => id, "post" => params}) do
-    changeset = Post
-    |> Blox.Repo.get(id)
-    |> Post.changeset(params)
+    changeset =
+      Post
+      |> Blox.Repo.get(id)
+      |> Post.changeset(params)
 
     case Blox.Repo.update(changeset) do
       {:ok, post} ->

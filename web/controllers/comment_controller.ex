@@ -9,9 +9,10 @@ defmodule Blox.CommentController do
 
   def create(conn, %{"comment" => params}) do
     post = conn.assigns[:post]
-    changeset = post
-    |> build_assoc(:comments)
-    |> Comment.changeset(params)
+    changeset =
+      post
+      |> build_assoc(:comments)
+      |> Comment.changeset(params)
 
     case Blox.Repo.insert(changeset) do
       {:ok, comment} ->
