@@ -12,7 +12,9 @@ defmodule Blox.Comment do
     timestamps
   end
 
-  def changeset(comment, params \\ :empty) do
-    comment |> cast(params, ~w(body), ~w())
+  def changeset(comment, params \\ %{}) do
+    comment
+    |> cast(params, [:body])
+    |> validate_required([:body])
   end
 end

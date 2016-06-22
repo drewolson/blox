@@ -5,7 +5,7 @@ defmodule Blox.Mixfile do
     [
       app: :blox,
       version: "0.0.1",
-      elixir: "~> 1.0",
+      elixir: "~> 1.3",
       elixirc_paths: ["lib", "web"],
       compilers: [:phoenix] ++ Mix.compilers,
       build_embedded: Mix.env == :prod,
@@ -33,11 +33,10 @@ defmodule Blox.Mixfile do
       {:phoenix, "~> 1.0"},
       {:cowboy, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 1.0"},
-      {:phoenix_ecto, "~> 2.0"},
+      {:ecto, "~> 2.0"},
+      {:phoenix_ecto, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.0"},
       {:phoenix_html, "~> 2.0"},
-      {:ex_spec, "~> 1.0", only: :test}
     ]
   end
 end

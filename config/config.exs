@@ -1,5 +1,9 @@
 use Mix.Config
 
+config :blox, :ecto_repos, [
+  Blox.Repo
+]
+
 config :blox, Blox.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "thisisatestvaluthisisatestvaluthisisatestvalueeethisisatestvalue",

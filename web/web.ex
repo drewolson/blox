@@ -17,7 +17,7 @@ defmodule Blox.Web do
       use Phoenix.Controller
 
       import Blox.Router.Helpers
-      import Ecto.Model, only: [build: 2]
+      import Ecto
     end
   end
 

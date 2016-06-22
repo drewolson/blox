@@ -5,7 +5,7 @@ defmodule Blox.PostControllerTest do
   alias Blox.Post
 
   describe "create" do
-    it "creates a post" do
+    test "creates a post" do
       post(conn, "/posts", %{
         "post": %{
           "title": "A title",
@@ -19,7 +19,7 @@ defmodule Blox.PostControllerTest do
       assert post.body == "Post body"
     end
 
-    it "doesn't create a post if the paramters are invalid" do
+    test "doesn't create a post if the paramters are invalid" do
       post(conn, "/posts", %{
         "post": %{
           "title": "",
@@ -34,7 +34,7 @@ defmodule Blox.PostControllerTest do
   end
 
   describe "delete" do
-    it "deletes the provided post" do
+    test "deletes the provided post" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
       delete(conn, "/posts/#{post.id}")
@@ -44,7 +44,7 @@ defmodule Blox.PostControllerTest do
   end
 
   describe "edit" do
-    it "renders" do
+    test "renders" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
       conn = get(conn, "/posts/#{post.id}/edit")
@@ -54,7 +54,7 @@ defmodule Blox.PostControllerTest do
   end
 
   describe "index" do
-    it "displays posts" do
+    test "displays posts" do
       %Post{title: "Post 1", body: "Body 1"} |> Blox.Repo.insert!
       %Post{title: "Post 2", body: "Body 2"} |> Blox.Repo.insert!
 
@@ -64,7 +64,7 @@ defmodule Blox.PostControllerTest do
       assert String.contains?(conn.resp_body, "Post 2")
     end
 
-    it "renders json" do
+    test "renders json" do
       post1 = %Post{title: "Post 1", body: "Body 1"} |> Blox.Repo.insert!
       post2 = %Post{title: "Post 2", body: "Body 2"} |> Blox.Repo.insert!
 
@@ -89,7 +89,7 @@ defmodule Blox.PostControllerTest do
   end
 
   describe "new" do
-    it "renders" do
+    test "renders" do
       conn = get(conn, "/posts/new")
 
       assert conn.status == 200
@@ -97,7 +97,7 @@ defmodule Blox.PostControllerTest do
   end
 
   describe "show" do
-    it "displays a post and its body" do
+    test "displays a post and its body" do
       post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert!
 
       conn = get(conn, "/posts/#{post.id}")
@@ -106,7 +106,7 @@ defmodule Blox.PostControllerTest do
       assert String.contains?(conn.resp_body, "Some lawyer-y stuff goes here")
     end
 
-    it "includes comments" do
+    test "includes comments" do
       post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert!
       %Comment{post_id: post.id, body: "I have the worst lawyers"} |> Blox.Repo.insert!
 
@@ -115,7 +115,7 @@ defmodule Blox.PostControllerTest do
       assert String.contains?(conn.resp_body, "I have the worst lawyers")
     end
 
-    it "renders json with comments" do
+    test "renders json with comments" do
       post = %Post{title: "Bob Loblaw", body: "Some lawyer-y stuff goes here"} |> Blox.Repo.insert!
       comment = %Comment{post_id: post.id, body: "I have the worst lawyers"} |> Blox.Repo.insert!
 
@@ -138,7 +138,7 @@ defmodule Blox.PostControllerTest do
   end
 
   describe "update" do
-    it "updates the post with the provided values" do
+    test "updates the post with the provided values" do
       post = %Post{title: "1", body: "1"} |> Blox.Repo.insert!
 
       patch(conn, "/posts/#{post.id}", %{
@@ -154,7 +154,7 @@ defmodule Blox.PostControllerTest do
       assert post.body == "2"
     end
 
-    it "doesn't update on validation errors" do
+    test "doesn't update on validation errors" do
       post = %Post{title: "1", body: "1"} |> Blox.Repo.insert!
 
       patch(conn, "/posts/#{post.id}", %{

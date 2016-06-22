@@ -15,8 +15,10 @@ defmodule Blox.Post do
     timestamps
   end
 
-  def changeset(post, params \\ :empty) do
-    post |> cast(params, ~w(title body), ~w())
+  def changeset(post, params \\ %{}) do
+    post
+    |> cast(params, [:title, :body])
+    |> validate_required([:title, :body])
   end
 
   def order_by_date(query) do

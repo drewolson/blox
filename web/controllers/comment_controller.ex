@@ -10,7 +10,7 @@ defmodule Blox.CommentController do
   def create(conn, %{"comment" => params}) do
     post = conn.assigns[:post]
     changeset = post
-    |> build(:comments)
+    |> build_assoc(:comments)
     |> Comment.changeset(params)
 
     case Blox.Repo.insert(changeset) do
@@ -24,7 +24,7 @@ defmodule Blox.CommentController do
 
   def delete(conn, %{"id" => id}) do
     post = conn.assigns[:post]
-    comment = post |> Ecto.Model.assoc(:comments) |> Blox.Repo.get(id)
+    comment = post |> assoc(:comments) |> Blox.Repo.get(id)
     Blox.Repo.delete!(comment)
 
     redirect conn, to: post_path(conn, :show, post)

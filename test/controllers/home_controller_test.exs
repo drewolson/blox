@@ -2,7 +2,7 @@ defmodule Blox.HomeControllerTest do
   use Blox.ControllerTestCase
 
   describe "show" do
-    it "renders successfully" do
+    test "renders successfully" do
       conn = get(conn, "/")
 
       assert conn.status == 200

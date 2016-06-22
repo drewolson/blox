@@ -55,7 +55,11 @@ defmodule Blox.PostController do
 
   def show(conn, %{"id" => id}) do
     post = Post |> Post.with_comments |> Blox.Repo.get(id)
-    new_comment = post |> build(:comments) |> Comment.changeset
+
+    new_comment =
+      post
+      |> build_assoc(:comments)
+      |> Comment.changeset
 
     render conn, :show,
       new_comment: new_comment,

@@ -5,16 +5,12 @@ defmodule Blox.TestCase do
 
   using(opts) do
     quote do
-      use ExSpec, unquote(opts)
+      use ExUnit.Case, unquote(opts)
     end
   end
 
   setup do
-    Ecto.Adapters.SQL.begin_test_transaction(Blox.Repo)
-
-    ExUnit.Callbacks.on_exit(fn ->
-      Ecto.Adapters.SQL.rollback_test_transaction(Blox.Repo)
-    end)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Blox.Repo)
   end
 end
 
@@ -33,5 +29,7 @@ defmodule Blox.ControllerTestCase do
     end
   end
 end
+
+Ecto.Adapters.SQL.Sandbox.mode(Blox.Repo, :manual)
 
 ExUnit.start

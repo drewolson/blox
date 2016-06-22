@@ -5,7 +5,7 @@ defmodule Blox.CommentControllerTest do
   alias Blox.Post
 
   describe "create" do
-    it "creates a comment" do
+    test "creates a comment" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
       post(conn, "/posts/#{post.id}/comments", %{
@@ -23,7 +23,7 @@ defmodule Blox.CommentControllerTest do
       assert comment.body == "Comment body"
     end
 
-    it "requires a body" do
+    test "requires a body" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
       post(conn, "/posts/#{post.id}/comments", %{
@@ -38,21 +38,21 @@ defmodule Blox.CommentControllerTest do
 
       assert post.comments == []
     end
-  end
 
-  it "redirects when no post is found" do
-    conn = post(conn, "/posts/-1/comments", %{
-      "comment": %{
-        "body": ""
-      }
-    })
+    test "redirects when no post is found" do
+      conn = post(conn, "/posts/-1/comments", %{
+        "comment": %{
+          "body": ""
+        }
+      })
 
-    assert redirected_to(conn) == post_path(conn, :index)
-    assert get_flash(conn, :error) == "Post not found"
+      assert redirected_to(conn) == post_path(conn, :index)
+      assert get_flash(conn, :error) == "Post not found"
+    end
   end
 
   describe "delete" do
-    it "deletes a comment" do
+    test "deletes a comment" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
       comment = %Comment{post_id: post.id, body: "A comment!"} |> Blox.Repo.insert!
 
