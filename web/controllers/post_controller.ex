@@ -19,9 +19,9 @@ defmodule Blox.PostController do
   end
 
   def delete(conn, %{"id" => id}) do
-    post = Blox.Repo.get(Post, id)
-
-    Blox.Repo.delete!(post)
+    Post
+    |> Blox.Repo.get(id)
+    |> Blox.Repo.delete!
 
     redirect conn, to: post_path(conn, :index)
   end
@@ -55,7 +55,10 @@ defmodule Blox.PostController do
   end
 
   def show(conn, %{"id" => id}) do
-    post = Post |> Post.with_comments |> Blox.Repo.get(id)
+    post =
+      Post
+      |> Post.with_comments
+      |> Blox.Repo.get(id)
 
     new_comment =
       post

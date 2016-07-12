@@ -8,7 +8,7 @@ defmodule Blox.CommentControllerTest do
     test "creates a comment" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
-      post(conn, "/posts/#{post.id}/comments", %{
+      post(build_conn, "/posts/#{post.id}/comments", %{
         "comment": %{
           "body": "Comment body"
         }
@@ -26,7 +26,7 @@ defmodule Blox.CommentControllerTest do
     test "requires a body" do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
 
-      post(conn, "/posts/#{post.id}/comments", %{
+      post(build_conn, "/posts/#{post.id}/comments", %{
         "comment": %{
           "body": ""
         }
@@ -40,7 +40,7 @@ defmodule Blox.CommentControllerTest do
     end
 
     test "redirects when no post is found" do
-      conn = post(conn, "/posts/-1/comments", %{
+      conn = post(build_conn, "/posts/-1/comments", %{
         "comment": %{
           "body": ""
         }
@@ -56,7 +56,7 @@ defmodule Blox.CommentControllerTest do
       post = %Post{title: "Title", body: "Body"} |> Blox.Repo.insert!
       comment = %Comment{post_id: post.id, body: "A comment!"} |> Blox.Repo.insert!
 
-      delete(conn, "/posts/#{post.id}/comments/#{comment.id}")
+      delete(build_conn, "/posts/#{post.id}/comments/#{comment.id}")
 
       post = Post |> Post.with_comments |> Blox.Repo.get(post.id)
 

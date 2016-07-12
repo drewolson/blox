@@ -8,9 +8,8 @@ defmodule Blox.CommentController do
   plug :find_post
 
   def create(conn, %{"comment" => params}) do
-    post = conn.assigns[:post]
     changeset =
-      post
+      conn.assigns[:post]
       |> build_assoc(:comments)
       |> Comment.changeset(params)
 
@@ -25,8 +24,11 @@ defmodule Blox.CommentController do
 
   def delete(conn, %{"id" => id}) do
     post = conn.assigns[:post]
-    comment = post |> assoc(:comments) |> Blox.Repo.get(id)
-    Blox.Repo.delete!(comment)
+
+    post
+    |> assoc(:comments)
+    |> Blox.Repo.get(id)
+    |> Blox.Repo.delete!
 
     redirect conn, to: post_path(conn, :show, post)
   end
@@ -35,7 +37,7 @@ defmodule Blox.CommentController do
     post = Blox.Repo.get(Post, conn.params["post_id"])
 
     if post do
-      conn |> assign(:post, post)
+      assign(conn, :post, post)
     else
       conn
       |> put_flash(:error, "Post not found")

@@ -22,10 +22,10 @@ defmodule Blox.Post do
   end
 
   def order_by_date(query) do
-    query |> order_by([p], desc: p.updated_at)
+    order_by(query, [p], desc: p.updated_at)
   end
 
   def with_comments(query) do
-    query |> preload(:comments)
+    preload(query, :comments)
   end
 end

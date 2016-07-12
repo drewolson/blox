@@ -3,7 +3,7 @@ defmodule Blox.HomeControllerTest do
 
   describe "show" do
     test "renders successfully" do
-      conn = get(conn, "/")
+      conn = get(build_conn, "/")
 
       assert conn.status == 200
     end
